@@ -102,3 +102,26 @@ def rysuj_wykres_punktowy (entry):
     canvas.draw()
     canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
     plt.close('all')
+
+root = tk.Tk()
+root.title("Kalkulator Statystyczny")
+
+label = tk.Label(root, text="Wprowadź dane oddzielone spacją lub wczytaj z pliku Excela:")
+label.pack()
+
+entry = tk.Entry(root, width=50)
+entry.pack()
+
+button_wczytaj = tk.Button(root, text="Wczytaj z Excela",
+                           command=lambda: wczytaj_z_excela(entry, wyniki_label, obliczenia_frame, dane))
+button_wczytaj.pack(padx=2, pady=2)
+
+obliczenia_frame = tk.Frame(root)
+obliczenia_frame.pack()
+
+rysowanie_frame = tk.Frame(root)
+rysowanie_frame.pack()
+
+button_histogram = tk.Button(rysowanie_frame, text="Rysuj Histogram", command=lambda: rysuj_histogram(entry))
+button_histogram.pack(side=tk.LEFT, padx=2, pady=2)
+
