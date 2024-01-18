@@ -125,3 +125,23 @@ rysowanie_frame.pack()
 button_histogram = tk.Button(rysowanie_frame, text="Rysuj Histogram", command=lambda: rysuj_histogram(entry))
 button_histogram.pack(side=tk.LEFT, padx=2, pady=2)
 
+button_wykres_punktowy = tk.Button(rysowanie_frame, text="Rysuj Wykres punktowy", command=lambda: rysuj_wykres_punktowy(entry))
+button_wykres_punktowy.pack(side=tk.LEFT, padx=2, pady=2)
+
+wynik_frame = tk.Frame(root)
+wynik_frame.pack()
+
+wyniki_label = tk.Label(wynik_frame, text="")
+wyniki_label.pack()
+
+dane = []
+
+dodaj_przycisk_obliczen(obliczenia_frame, statistics.mean, "Średnią arytmetyczną", entry, wyniki_label, dane)
+dodaj_przycisk_obliczen(obliczenia_frame, statistics.median, "Medianę", entry, wyniki_label, dane)
+dodaj_przycisk_obliczen(obliczenia_frame, statistics.mode, "Modę", entry, wyniki_label, dane)
+dodaj_przycisk_obliczen(obliczenia_frame, max, "Maksimum", entry, wyniki_label, dane)
+dodaj_przycisk_obliczen(obliczenia_frame, min, "Minimum", entry, wyniki_label, dane)
+dodaj_przycisk_obliczen(obliczenia_frame, statistics.stdev, "Odchylenie standardowe", entry, wyniki_label, dane)
+dodaj_przycisk_obliczen(obliczenia_frame, statistics.variance, "Wariancję", entry, wyniki_label, dane)
+
+root.mainloop()
