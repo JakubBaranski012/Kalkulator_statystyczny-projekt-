@@ -46,3 +46,59 @@ def wczytaj_z_excela (entry, wyniki_label, obliczenia_frame, dane):
 
     except Exception as e:
         messagebox.showerror("Błąd", f"Wystąpił błąd podczas wczytywania pliku Excela:\n{str(e)}")
+
+def rysuj_histogram (entry):
+    dane_wejsciowe = entry.get()
+
+    if not dane_wejsciowe:
+        messagebox.showerror("Błąd", "Proszę wprowadzić dane lub wczytać z pliku.")
+        return
+
+    try:
+        dane = [float(x) for x in dane_wejsciowe.split()]
+    except ValueError:
+        messagebox.showerror("Błąd", "Wprowadź poprawne liczby.")
+        return
+
+    top = Toplevel(root)
+    top.title('Histogram')
+
+    fig, ax = plt.subplots()
+    ax.hist(dane, bins=10, edgecolor='black')
+    ax.set_title('Histogram')
+    ax.set_xlabel('Wartości')
+    ax.set_ylabel('Częstość występowania')
+
+    canvas = FigureCanvasTkAgg(fig, master=top)
+    canvas.draw()
+    canvas.get_tk_widget().pack(fill=tk.BOTH, expand=1)
+    plt.close('all')
+
+
+def rysuj_wykres_punktowy (entry):
+    dane_wejsciowe = entry.get()
+
+    if not dane_wejsciowe:
+        messagebox.showerror("Błąd", "Proszę wprowadzić dane lub wczytać z pliku.")
+        return
+
+    try:
+        dane = [float(x) for x in dane_wejsciowe.split()]
+    except ValueError:
+        messagebox.showerror("Błąd", "Wprowadź poprawne liczby.")
+        return
+
+    top = Toplevel(root)
+    top.title('Wykres punktowy')
+
+    fig, ax = plt.subplots()
+    ax.plot(sorted(dane), 'o-', label='Wartości')
+    ax.set_title('Wykres Punktowy')
+    ax.set_xlabel('Indeks')
+    ax.set_ylabel('Wartości')
+    ax.legend()
+
+    canvas = FigureCanvasTkAgg(fig, master=top)
+    canvas.draw()
+    canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+    plt.close('all')
